@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="AI Operating System – Corso pratico di Intelligenza Artificiale per professionisti tecnici e aziende. Con Sergio Toccaceli, AI Literacy Trainer certificato.">
+    <title>AI Operating System | Sergio Toccaceli</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1a3a5a;
+            --accent: #d4af37;
+            --light: #f4f7f6;
+            --dark: #121212;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Inter', sans-serif; line-height: 1.6; color: var(--dark); background-color: #fff; }
+
+        header {
+            padding: 16px 20px;
+            text-align: center;
+            background: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.07);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        .logo { max-height: 80px; }
+
+        .hero {
+            padding: 70px 20px 60px;
+            text-align: center;
+            background: linear-gradient(135deg, var(--primary) 0%, #2c5282 100%);
+            color: white;
+        }
+        .hero-badge {
+            display: inline-block;
+            background: var(--accent);
+            color: var(--primary);
+            font-weight: 700;
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            padding: 6px 16px;
+            border-radius: 50px;
+            margin-bottom: 20px;
+        }
+        .hero h1 { font-size: 2.6rem; margin-bottom: 20px; line-height: 1.2; }
+        .hero h1 span { color: var(--accent); }
+        .hero p { font-size: 1.15rem; max-width: 720px; margin: 0 auto 30px; opacity: 0.9; }
+        .hero-cta {
+            display: inline-block;
+            background: var(--accent);
+            color: var(--primary);
+            padding: 16px 36px;
+            border-radius: 6px;
+            font-weight: 700;
+            text-decoration: none;
+            font-size: 1rem;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .hero-cta:hover { transform: scale(1.05); box-shadow: 0 6px 20px rgba(0,0,0,0.2); }
+
+        .container { max-width: 1000px; margin: 0 auto; padding: 40px 20px; }
+
+        .profile-section {
+            display: flex;
+            align-items: center;
+            gap: 40px;
+            margin-bottom: 70px;
+            flex-wrap: wrap;
+        }
+        .profile-img {
+            flex: 1;
+            min-width: 260px;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.12);
+        }
+        .profile-img img { width: 100%; display: block; }
+        .profile-text { flex: 2; min-width: 280px; }
+        .profile-text h2 { font-size: 1.8rem; color: var(--primary); margin-bottom: 12px; }
+        .profile-text p { margin-bottom: 12px; color: #444; }
+        .profile-badges { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 20px; }
+        .badge {
+            background: var(--light);
+            border: 1px solid #dde3e1;
+            border-radius: 50px;
+            padding: 6px 14px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        .audience-section { margin-bottom: 70px; }
+        .audience-section h2 { text-align: center; color: var(--primary); font-size: 1.9rem; margin-bottom: 10px; }
+        .section-subtitle { text-align: center; color: #666; margin-bottom: 36px; }
+        .audience-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+        .audience-card {
+            background: white;
+            border: 2px solid #e8ecf0;
+            border-radius: 16px;
+            padding: 30px;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+        .audience-card:hover { border-color: var(--accent); box-shadow: 0 8px 24px rgba(0,0,0,0.08); }
+        .audience-icon { font-size: 2.4rem; margin-bottom: 14px; }
+        .audience-card h3 { color: var(--primary); font-size: 1.2rem; margin-bottom: 10px; }
+        .audience-card p { color: #555; font-size: 0.95rem; margin-bottom: 16px; }
+        .audience-list { list-style: none; padding: 0; }
+        .audience-list li { padding: 5px 0; font-size: 0.9rem; color: #444; }
+        .audience-list li::before { content: "✓ "; color: #2e7d32; font-weight: 700; }
+
+        .highlights {
+            background: var(--primary);
+            color: white;
+            padding: 50px 40px;
+            border-radius: 20px;
+            margin-bottom: 70px;
+            text-align: center;
+        }
+        .highlights h2 { font-size: 1.7rem; margin-bottom: 30px; }
+        .highlights-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 20px; }
+        .highlight-item { padding: 20px 10px; }
+        .highlight-item .number { font-size: 2.2rem; font-weight: 700; color: var(--accent); }
+        .highlight-item p { font-size: 0.9rem; opacity: 0.85; margin-top: 4px; }
+
+        .program { background: var(--light); padding: 50px 40px; border-radius: 20px; margin-bottom: 70px; }
+        .program h2 { text-align: center; color: var(--primary); font-size: 1.9rem; margin-bottom: 10px; }
+        .mod-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin-top: 30px; }
+        .mod-card {
+            background: white;
+            padding: 22px;
+            border-left: 4px solid var(--accent);
+            border-radius: 8px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+        }
+        .mod-card h3 { color: var(--primary); margin-bottom: 8px; font-size: 1rem; font-weight: 700; }
+        .mod-card p { color: #555; font-size: 0.9rem; }
+
+        .tools-section { margin-bottom: 70px; text-align: center; }
+        .tools-section h2 { color: var(--primary); font-size: 1.9rem; margin-bottom: 10px; }
+        .tools-grid { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; margin-top: 24px; }
+        .tool-tag {
+            background: var(--light);
+            border: 1px solid #dde3e1;
+            border-radius: 50px;
+            padding: 8px 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        .business-cta {
+            background: linear-gradient(135deg, #f4f7f6, #e8f0eb);
+            border: 2px solid #c8d8c8;
+            border-radius: 20px;
+            padding: 50px 40px;
+            text-align: center;
+            margin-bottom: 70px;
+        }
+        .business-cta h2 { color: var(--primary); font-size: 1.8rem; margin-bottom: 12px; }
+        .business-cta p { color: #555; max-width: 600px; margin: 0 auto 24px; }
+        .business-list { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; margin-bottom: 28px; }
+        .business-pill {
+            background: white;
+            border: 1px solid #bcd0bc;
+            border-radius: 50px;
+            padding: 8px 18px;
+            font-size: 0.88rem;
+            color: #2e5e2e;
+            font-weight: 600;
+        }
+
+        .form-section {
+            background: var(--primary);
+            color: white;
+            padding: 50px 40px;
+            border-radius: 20px;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        .form-section h2 { font-size: 1.9rem; margin-bottom: 10px; }
+        .form-section p { opacity: 0.85; max-width: 560px; margin: 0 auto 24px; }
+        .btn-group { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+        .btn {
+            background: var(--accent);
+            color: var(--primary);
+            padding: 15px 30px;
+            border: none;
+            border-radius: 6px;
+            font-weight: 700;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            transition: transform 0.2s;
+        }
+        .btn:hover { transform: scale(1.05); }
+        .btn-outline {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+            padding: 13px 28px;
+            border-radius: 6px;
+            font-weight: 700;
+            text-decoration: none;
+            display: inline-block;
+            transition: transform 0.2s;
+        }
+        .btn-outline:hover { transform: scale(1.05); }
+
+        .whatsapp-float {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #25d366;
+            color: white;
+            padding: 14px 22px;
+            border-radius: 50px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.22);
+            font-weight: 700;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            z-index: 999;
+            font-size: 0.95rem;
+        }
+
+        footer { text-align: center; padding: 40px; font-size: 0.8rem; color: #999; }
+
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 1.8rem; }
+            .audience-grid { grid-template-columns: 1fr; }
+            .profile-section { text-align: center; }
+            .program, .highlights, .form-section, .business-cta { padding: 30px 20px; }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <img src="logo.png" alt="Logo AI Operating System" class="logo">
+</header>
+
+<section class="hero">
+    <div class="hero-badge">🎓 Certificato MOOC – Università di Urbino Carlo Bo · 35 ore <div class="hero-badge">🎓 Certificato Università di Urbino Carlo Bo</div>nbsp;<a href="attestato.png" target="_blank" style="color:var(--primary);font-weight:700;text-decoration:underline;">Visualizza attestato →</a></div>
+    <h1>L'IA che <span>trasforma</span><br>il tuo modo di lavorare</h1>
+    <p>Un corso pratico di una giornata per professionisti tecnici e aziende che vogliono smettere di perdere tempo e iniziare a lavorare davvero con l'Intelligenza Artificiale.</p>
+    <a href="/cdn-cgi/l/email-protection#2841464e47065b5c5b4d5a5e414b4d684f45494144064b4745" class="hero-cta">Richiedi informazioni →</a>
+</section>
+
+<div class="container">
+
+    <!-- PROFILO -->
+    <div class="profile-section">
+        <div class="profile-img">
+            <img src="sergio.png" alt="Sergio Toccaceli">
+        </div>
+        <div class="profile-text">
+            <h2>Sergio Toccaceli<br>AI Literacy Trainer</h2>
+            <p>Dal 2020 studia e sperimenta l'Intelligenza Artificiale sul campo. Nel 2025 ha formalizzato la sua competenza con una certificazione accademica di 35 ore presso l'Università di Urbino Carlo Bo.</p>
+            <p>Non solo teoria: ogni concetto nasce da anni di applicazione pratica negli studi tecnici e nelle aziende.</p>
+            <div class="profile-badges">
+                <span class="badge">✅ Programma aggiornato 2026</span>
+                <span class="badge">✅ Casi studio reali</span>
+                <span class="badge">✅ Strumenti subito operativi</span>
+                <span class="badge">✅ Certificato accademico</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- PER CHI È -->
+    <section class="audience-section">
+        <h2>Per chi è questo corso?</h2>
+        <p class="section-subtitle">Il corso si adatta a te — che tu sia un libero professionista o gestisca un team aziendale.</p>
+        <div class="audience-grid">
+            <div class="audience-card">
+                <div class="audience-icon">📐</div>
+                <h3>Professionisti Tecnici</h3>
+                <p>Per chi lavora ogni giorno con documenti, calcoli, rilievi e relazioni. Impari a delegare all'IA tutto ciò che ti rallenta.</p>
+                <ul class="audience-list">
+                    <li>Geometri e Topografi</li>
+                    <li>Ingegneri e Architetti</li>
+                    <li>Periti e Consulenti tecnici</li>
+                    <li>Studi professionali associati</li>
+                </ul>
+            </div>
+            <div class="audience-card">
+                <div class="audience-icon">🏢</div>
+                <h3>Aziende e Team</h3>
+                <p>Per chi vuole ottimizzare i flussi di lavoro interni e portare l'efficienza dell'IA in ogni reparto, su misura.</p>
+                <ul class="audience-list">
+                    <li>PMI e studi associati</li>
+                    <li>Imprese edili e di costruzione</li>
+                    <li>Uffici amministrativi e commerciali</li>
+                    <li>Team che gestiscono dati e documenti</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- NUMERI -->
+    <div class="highlights">
+        <h2>Un corso progettato per risultati immediati</h2>
+        <div class="highlights-grid">
+            <div class="highlight-item">
+                <div class="number">7</div>
+                <p>Moduli pratici</p>
+            </div>
+            <div class="highlight-item">
+                <div class="number">1</div>
+                <p>Giornata intensiva</p>
+            </div>
+            <div class="highlight-item">
+                <div class="number">10+</div>
+                <p>Strumenti AI reali</p>
+            </div>
+            <div class="highlight-item">
+                <div class="number">0</div>
+                <p>Conoscenze tecniche richieste</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- PROGRAMMA -->
+    <section class="program">
+        <h2>Programma del Corso</h2>
+        <p class="section-subtitle">Dalla teoria ai casi concreti: ogni modulo include esempi e prompt pronti all'uso.</p>
+        <div class="mod-grid">
+            <div class="mod-card">
+                <h3>MOD 01: Fondamenta Operative</h3>
+                <p>Come funziona davvero l'IA. Reti neurali, LLM, allucinazioni e il Framework ROLE per scrivere prompt efficaci.</p>
+            </div>
+            <div class="mod-card">
+                <h3>MOD 02: L'IA nel Lavoro Quotidiano</h3>
+                <p>Analisi di contratti e documenti complessi, redazione di relazioni tecniche, delegare all'IA il lavoro ripetitivo.</p>
+            </div>
+            <div class="mod-card">
+                <h3>MOD 03: Calcoli e Dati</h3>
+                <p>Excel avanzato con IA, macro VBA automatiche, computi metrici 2.0 con laser scanner e Claude.</p>
+            </div>
+            <div class="mod-card">
+                <h3>MOD 04: L'Arsenale Specializzato</h3>
+                <p>Perplexity, NotebookLM, Apollo.io, MeetingAI, Voicenotes: il toolkit del professionista AI-first.</p>
+            </div>
+            <div class="mod-card">
+                <h3>MOD 05: La Centrale Operativa</h3>
+                <p>Google Workspace + Gemini AI: automazione di email, solleciti, calendari e reportistica integrata.</p>
+            </div>
+            <div class="mod-card">
+                <h3>MOD 06: IA Generativa e Visual</h3>
+                <p>Fotoinserimenti professionali, miglioramento render 3D, vettorizzazione planimetrie da point cloud.</p>
+            </div>
+            <div class="mod-card">
+                <h3>MOD 07: Privacy e Sicurezza</h3>
+                <p>Come proteggere i dati aziendali. Cosa può fare l'IA con le tue informazioni e come gestirlo correttamente.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- STRUMENTI -->
+    <section class="tools-section">
+        <h2>Gli strumenti che userai</h2>
+        <p class="section-subtitle">Non un solo tool, ma un ecosistema completo pronto per il tuo lavoro.</p>
+        <div class="tools-grid">
+            <span class="tool-tag">ChatGPT</span>
+            <span class="tool-tag">Claude</span>
+            <span class="tool-tag">Gemini</span>
+            <span class="tool-tag">Perplexity</span>
+            <span class="tool-tag">NotebookLM</span>
+            <span class="tool-tag">MeetingAI</span>
+            <span class="tool-tag">Apollo.io</span>
+            <span class="tool-tag">Voicenotes</span>
+            <span class="tool-tag">Gamma</span>
+            <span class="tool-tag">Google Workspace AI</span>
+            <span class="tool-tag">Gendo</span>
+        </div>
+    </section>
+
+    <!-- CTA AZIENDE -->
+    <section class="business-cta">
+        <h2>Hai un'azienda o un team?</h2>
+        <p>Ogni realtà aziendale ha esigenze diverse. Contattami per progettare insieme un percorso formativo su misura, pensato per i tuoi processi e il tuo settore.</p>
+        <div class="business-list">
+            <span class="business-pill">📋 Analisi dei tuoi flussi di lavoro</span>
+            <span class="business-pill">🎯 Moduli calibrati sul tuo settore</span>
+            <span class="business-pill">👥 Formazione per team anche numerosi</span>
+            <span class="business-pill">📍 In sede o da remoto</span>
+        </div>
+        <a href="/cdn-cgi/l/email-protection#076e696168297473746275716e646247606a666e6b2964686a" class="btn">Richiedi un corso su misura</a>
+    </section>
+
+    <!-- CONTATTI -->
+    <section class="form-section">
+        <h2>Inizia oggi</h2>
+        <p>Iscrizione singola o preventivo aziendale: scrivimi e ti rispondo entro 24 ore.</p>
+        <div class="btn-group">
+            <a href="/cdn-cgi/l/email-protection#dab3b4bcb5f4a9aea9bfa8acb3b9bf9abdb7bbb3b6f4b9b5b7" class="btn">✉️ Scrivimi una mail</a>
+            <a href="https://wa.me/393384833634?text=Ciao%20Sergio,%20vorrei%20informazioni%20sul%20corso%20IA" class="btn-outline" target="_blank">💬 WhatsApp</a>
+        </div>
+    </section>
+
+</div>
+
+<a href="https://wa.me/393384833634?text=Ciao%20Sergio,%20vorrei%20informazioni%20sul%20corso%20IA" class="whatsapp-float" target="_blank">
+    💬 Scrivimi su WhatsApp
+</a>
+
+<footer>
+    &copy; 2026 Sergio Toccaceli – AI Literacy Tra
